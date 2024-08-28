@@ -268,8 +268,14 @@ function animIcon() {
 					duration : 200
 				}
 			).onfinish = function() {
-				cvLink.addEventListener('click', function() {
-					open('https://github.com/SabariKameswaran/SabariKameswaran.github.io/blob/main/cv.pdf');
+				cvLink.addEventListener('click', function(event) {
+        				event.preventDefault();
+        				const link = document.createElement('a');
+        				link.href = 'https://github.com/SabariKameswaran/SabariKameswaran.github.io/blob/main/cv.pdf';
+        				link.download = 'cv.pdf';
+        				document.body.appendChild(link);
+        				link.click(); 
+        				document.body.removeChild(link);
 				});
 			};
 		};
