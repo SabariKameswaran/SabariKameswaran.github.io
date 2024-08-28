@@ -1,3 +1,6 @@
+/////////////////
+///// RENDERING
+/////////////////
 function renderIdle() {
 	mario.drawImage(canvasIdle, 3 * p, p);
 }
@@ -56,12 +59,17 @@ function renderRun(timestamp) {
 	}
 	runAnim = requestAnimationFrame(renderRun);
 }
+
+/////////////////
+///// POSITIONS
+/////////////////
 function xMario() {
 	return parseInt(canvas.style.left);
 }
 function yMario() {
 	return parseInt(canvas.style.top);
 }
+// function to center screen to mario when mario moove
 function centerScreen() {
 	bw = 1500;
 	bh = 599;
@@ -91,6 +99,9 @@ function centerScreen() {
 	console.log(screeny);
 	scrollTo(screenx, screeny);
 }
+/////////////////
+///// CONTROLS
+/////////////////
 function pressRight(event) {
 	if (
 		right == false &&
@@ -185,7 +196,13 @@ function pressJump(event) {
 		requestAnimationFrame(jumping);
 	}
 }
+/////////////////
+///// ANIMATIONS
+/////////////////
+
+// Animation LinkedIn, CV, Portfolio icons
 function animIcon() {
+	// LINKEDIN ANIM
 	if (objStrike.id == 'cube6') {
 		let linkedin = document.querySelector('#linkedin');
 		linkedin.animate(
@@ -221,6 +238,7 @@ function animIcon() {
 			};
 		};
 	}
+	// CV ANIM
 	if (objStrike.id == 'cube2') {
 		let cv = document.querySelector('#cv');
 		cv.animate(
@@ -256,6 +274,7 @@ function animIcon() {
 			};
 		};
 	}
+	// PORTFOLIO ANIM
 	if (objStrike.id == 'cube4') {
 		let pf = document.querySelector('#folder');
 		pf.animate(
@@ -293,6 +312,7 @@ function animIcon() {
 	}
 }
 
+// return Frame Ratio to modify animation speed according to framerate
 function frameRate(timestamp, animID, fName) {
 	if (animID == null) {
 		fName.start = timestamp;
@@ -355,10 +375,14 @@ function goLeft(timestamp) {
 }
 
 function jumping(timestamp) {
+	// Frame Ratio to modify animation speed according to framerate
 	jumping.frameRatio = frameRate(timestamp, jumpAnim, jumping);
+	// animation function
 	t += 1 * jumping.frameRatio;
 	y = 17 * t - (0.6 * t) ** 2 + yt;
+	// COLLISION WITH GAMEOBJETCS
 	for (obj in gameObj) {
+		// COLLISION UPPER
 		if (
 			xMario() + parseInt(canvas.width) > gameObj[obj].xmin &&
 			xMario() < gameObj[obj].xmax &&
@@ -381,6 +405,7 @@ function jumping(timestamp) {
 			requestAnimationFrame(gravity);
 			return;
 		}
+		// COLLISION UNDER
 		if (
 			xMario() + parseInt(canvas.width) >= gameObj[obj].xmin &&
 			xMario() <= gameObj[obj].xmax &&
@@ -399,6 +424,7 @@ function jumping(timestamp) {
 					xMario() + parseInt(canvas.width) / 2 <= gameObj[obj].xmax
 				) {
 					objStrike = gameObj[obj].item;
+					// BREAK OBJECT ANIMATIONS
 					if (objStrike.classList.contains('break')) {
 						objStrike.animate(
 							[
@@ -412,6 +438,7 @@ function jumping(timestamp) {
 								duration : 200
 							}
 						);
+						// icons portfolio, CV, LinkedIn : animation
 						animIcon();
 
 						objStrike.classList.remove('break');
@@ -421,6 +448,7 @@ function jumping(timestamp) {
 			return;
 		}
 	}
+	// JUMP ANIM
 	if (y > 0) {
 		canvas.style.transform = `translateY(${-y}px)`;
 		inAir = true;
@@ -431,6 +459,7 @@ function jumping(timestamp) {
 		centerScreen();
 		jumpAnim = requestAnimationFrame(jumping);
 	} else {
+		// LANDING
 		yt = 0;
 		y = yt;
 		canvas.style.transform = `translateY(${y}px)`;
@@ -449,6 +478,7 @@ function jumping(timestamp) {
 
 function gravity(timestamp) {
 	for (obj in gameObj) {
+		// GRAVITY AFTER JUMPING
 		if (
 			xMario() + parseInt(canvas.width) > gameObj[obj].xmin &&
 			xMario() < gameObj[obj].xmax &&
@@ -461,9 +491,11 @@ function gravity(timestamp) {
 			onObj = false;
 		}
 	}
+	// Frame Ratio to modify animation speed according to framerate
 	gravity.frameRatio = frameRate(timestamp, gravAnim, gravity);
 
 	if (!inAir && onObj == false) {
+		// FALLING
 		falling = true;
 		g -= 10 * gravity.frameRatio;
 		canvas.style.transform = `translateY(${-1 * (y + g)}px)`;
@@ -482,6 +514,7 @@ function gravity(timestamp) {
 		gravAnim = requestAnimationFrame(gravity);
 		return;
 	} else if (headStrike) {
+		// GRAVITY AFTER COLLISION IN THE AIR FROM THE HEAD
 		g -= 10 * gravity.frameRatio;
 		canvas.style.transform = `translateY(${-1 * (y + g)}px)`;
 		if (y + g <= 0) {
@@ -509,6 +542,9 @@ function gravity(timestamp) {
 		return;
 	}
 }
+
+/////// ----------- START CODE ---------------- ////////
+
 let gameObj = {};
 blocks = document.querySelectorAll('.cube');
 let count = 0;
@@ -523,7 +559,9 @@ for (block of blocks) {
 	};
 }
 // y = 0 is the ground, y > 0 if mario is going up
-vity
+
+// INIT VAR
+// initialize coo / time / gravity
 let t = 0;
 let y = 0;
 let yt = 0;
@@ -532,40 +570,63 @@ let screenx = 0;
 let screeny = 0;
 let g = 0;
 let countGrav = 0;
+
+// right
 let right = false;
 let rightAnim = null;
 let faceRight = true;
+
+// left
 let left = false;
 let leftAnim = null;
+
+// jump
 let inAir = false;
 let onObj = false;
 let jumpAnim = null;
 let gravAnim = null;
 let falling = false;
+
+// attack anim
 let headStrike = null;
 let objStrike = null;
+
+// rendering
 let now = performance.now();
 let renderState = 'Idle';
 let runAnim = null;
+
+// icons animation counter
 let iconCount = 0;
+
+// initialize mario model and screen position
 renderIdle();
 centerScreen();
+// center screen on screen rotation
 screen.orientation.addEventListener('change', function() {
 	setTimeout(centerScreen, 200);
 });
 
+// ARROW RIGHT
+// PRESS
 document.addEventListener('keydown', pressRight);
+// RELEASE
 document.addEventListener('keyup', releaseRight);
 
+// BUTTON RIGHT
 buttonRight = document.querySelector('#right');
+// // CLICK
 // buttonRight.addEventListener('mousedown', pressRight);
+// // RELEASE
 // buttonRight.addEventListener('mouseup', releaseRight);
 // buttonRight.addEventListener('mouseleave', releaseRight);
+// TOUCH
 buttonRight.addEventListener('touchstart', function(e) {
 	e.preventDefault();
 	// console.log(e);
 	pressRight(e);
 });
+// RELEASE
 buttonRight.addEventListener('touchend', function(e) {
 	e.preventDefault();
 	// console.log(e);
@@ -575,16 +636,26 @@ buttonRight.addEventListener('touchcancel', function(e) {
 	e.preventDefault();
 	releaseRight(e);
 });
+
+// ARROW LEFT
+// PRESS
 document.addEventListener('keydown', pressLeft);
+// RELEASE
 document.addEventListener('keyup', releaseLeft);
+
+// BUTTON LEFT
 buttonLeft = document.querySelector('#left');
+// // CLICK
 // buttonLeft.addEventListener('mousedown', pressLeft);
+// // RELEASE
 // buttonLeft.addEventListener('mouseup', releaseLeft);
 // buttonLeft.addEventListener('mouseleave', releaseLeft);
+// TOUCH
 buttonLeft.addEventListener('touchstart', function(e) {
 	e.preventDefault();
 	pressLeft(e);
 });
+// RELEASE
 buttonLeft.addEventListener('touchend', function(e) {
 	e.preventDefault();
 	// console.log(e);
@@ -594,11 +665,17 @@ buttonLeft.addEventListener('touchcancel', function(e) {
 	e.preventDefault();
 	releaseLeft(e);
 });
+
+// ARROW TOP
 document.addEventListener('keydown', pressJump);
+
+// BUTTON TOP / A
 buttonTop = document.querySelector('#top');
 buttonA = document.querySelector('#A');
+// // CLICK
 // buttonTop.addEventListener('mousedown', pressJump);
 // buttonA.addEventListener('mousedown', pressJump);
+// TOUCH
 buttonTop.addEventListener('touchstart', function(e) {
 	e.preventDefault();
 	pressJump(e);

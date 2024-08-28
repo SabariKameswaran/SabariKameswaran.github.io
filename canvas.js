@@ -1,14 +1,23 @@
+// CANVAS MAIN
 const canvas = document.querySelector('#main');
 let p = 4;
+// SIZE and COO X, Y
 canvas.width = 18 * p;
 canvas.height = 17 * p;
 canvas.style.left = '50px';
 canvas.style.top = '400px';
+
 const mario = canvas.getContext('2d');
+
+// CANVAS IDLE
 const canvasIdle = document.querySelector('#idle');
+// SIZE
 canvasIdle.width = 16 * p;
 canvasIdle.height = 17 * p;
+
 const idleMario = canvasIdle.getContext('2d');
+
+// red
 idleMario.fillStyle = '#fd0200';
 idleMario.fillRect(3 * p, 0, 6 * p, p);
 idleMario.fillRect(2 * p, p, 10 * p, p);
@@ -21,6 +30,8 @@ idleMario.fillRect(0, 9 * p, 4 * p, p);
 idleMario.fillRect(8 * p, 9 * p, 4 * p, p);
 idleMario.fillRect(2 * p, 10 * p, p, p);
 idleMario.fillRect(9 * p, 10 * p, p, p);
+
+// brown
 idleMario.fillStyle = '#974708';
 idleMario.fillRect(2 * p, 2 * p, 3 * p, p);
 idleMario.fillRect(1 * p, 3 * p, 1 * p, p);
@@ -32,11 +43,15 @@ idleMario.fillRect(1 * p, 14 * p, 3 * p, p);
 idleMario.fillRect(8 * p, 14 * p, 3 * p, p);
 idleMario.fillRect(0, 15 * p, 4 * p, p);
 idleMario.fillRect(8 * p, 15 * p, 4 * p, p);
+
+// black
 idleMario.fillStyle = '#000000';
 idleMario.fillRect(8 * p, 2 * p, 1 * p, p);
 idleMario.fillRect(8 * p, 3 * p, 1 * p, p);
 idleMario.fillRect(9 * p, 4 * p, 1 * p, p);
 idleMario.fillRect(8 * p, 5 * p, 4 * p, p);
+
+// blue
 idleMario.fillStyle = '#0073c9';
 idleMario.fillRect(4 * p, 7 * p, 1 * p, p);
 idleMario.fillRect(4 * p, 8 * p, 1 * p, p);
@@ -49,6 +64,8 @@ idleMario.fillRect(3 * p, 11 * p, 6 * p, p);
 idleMario.fillRect(2 * p, 12 * p, 8 * p, p);
 idleMario.fillRect(2 * p, 13 * p, 3 * p, p);
 idleMario.fillRect(7 * p, 13 * p, 3 * p, p);
+
+// flesh
 idleMario.fillStyle = '#fdc092';
 idleMario.fillRect(5 * p, 2 * p, 3 * p, p);
 idleMario.fillRect(9 * p, 2 * p, 1 * p, p);
@@ -60,9 +77,13 @@ idleMario.fillRect(5 * p, 4 * p, 4 * p, p);
 idleMario.fillRect(10 * p, 4 * p, 2 * p, p); // nose
 idleMario.fillRect(3 * p, 5 * p, 5 * p, p);
 idleMario.fillRect(3 * p, 6 * p, 8 * p, p);
+
+// yellow
 idleMario.fillStyle = '#f8ff04';
 idleMario.fillRect(4 * p, 10 * p, 1 * p, p);
 idleMario.fillRect(7 * p, 10 * p, 1 * p, p);
+
+// white
 idleMario.fillStyle = '#ffffff';
 idleMario.fillRect(0 * p, 10 * p, 2 * p, p);
 idleMario.fillRect(10 * p, 10 * p, 2 * p, p);
@@ -70,11 +91,19 @@ idleMario.fillRect(0 * p, 11 * p, 3 * p, p);
 idleMario.fillRect(9 * p, 11 * p, 3 * p, p);
 idleMario.fillRect(0 * p, 12 * p, 2 * p, p);
 idleMario.fillRect(10 * p, 12 * p, 2 * p, p);
+
+///////////////////////////////////////////////////////
+
+// CANVAS RUN1
 const canvasRun1 = document.querySelector('#run1');
+// SIZE
 canvasRun1.width = 18 * p;
 canvasRun1.height = 17 * p;
 const pr = 2;
+
 const run1Mario = canvasRun1.getContext('2d');
+
+// red
 run1Mario.fillStyle = '#fd0200';
 run1Mario.fillRect((pr + 3) * p, 0, 6 * p, p);
 run1Mario.fillRect((pr + 2) * p, p, 10 * p, p);
@@ -87,6 +116,8 @@ run1Mario.fillRect((pr + 5) * p, 8 * p, 2 * p, p);
 run1Mario.fillRect((pr + 8) * p, 8 * p, 3 * p, p);
 run1Mario.fillRect((pr + 2) * p, 9 * p, 4 * p, p);
 run1Mario.fillRect((pr + 8) * p, 9 * p, 4 * p, p);
+
+// brown
 run1Mario.fillStyle = '#974708';
 run1Mario.fillRect((pr + 2) * p, 2 * p, 3 * p, p);
 run1Mario.fillRect((pr + 1) * p, 3 * p, 1 * p, p);
@@ -102,11 +133,15 @@ run1Mario.fillRect((pr + 10) * p, 11 * p, 2 * p, p);
 run1Mario.fillRect((pr + 10) * p, 12 * p, 2 * p, p);
 run1Mario.fillRect((pr + 10) * p, 13 * p, 2 * p, p);
 run1Mario.fillRect((pr + 11) * p, 10 * p, 1 * p, p);
+
+// black
 run1Mario.fillStyle = '#000000';
 run1Mario.fillRect((pr + 8) * p, 2 * p, 1 * p, p);
 run1Mario.fillRect((pr + 8) * p, 3 * p, 1 * p, p);
 run1Mario.fillRect((pr + 9) * p, 4 * p, 1 * p, p);
 run1Mario.fillRect((pr + 8) * p, 5 * p, 4 * p, p);
+
+// blue
 run1Mario.fillStyle = '#0073c9';
 run1Mario.fillRect((pr + 4) * p, 7 * p, 3 * p, p);
 run1Mario.fillRect((pr + 4) * p, 8 * p, 3 * p, p);
@@ -120,6 +155,8 @@ run1Mario.fillRect((pr + 1) * p, 12 * p, 9 * p, p);
 run1Mario.fillRect((pr + 0) * p, 13 * p, 7 * p, p);
 run1Mario.fillRect((pr + 1) * p, 14 * p, 3 * p, p);
 run1Mario.fillRect((pr + 7) * p, 13 * p, 3 * p, p);
+
+// flesh
 run1Mario.fillStyle = '#fdc092';
 run1Mario.fillRect((pr + 5) * p, 2 * p, 3 * p, p);
 run1Mario.fillRect((pr + 9) * p, 2 * p, 1 * p, p);
@@ -131,6 +168,8 @@ run1Mario.fillRect((pr + 5) * p, 4 * p, 4 * p, p);
 run1Mario.fillRect((pr + 10) * p, 4 * p, 2 * p, p); // nose
 run1Mario.fillRect((pr + 3) * p, 5 * p, 5 * p, p);
 run1Mario.fillRect((pr + 3) * p, 6 * p, 8 * p, p);
+
+// yellow
 run1Mario.fillStyle = '#f8ff04';
 run1Mario.fillRect((pr + 5) * p, 9 * p, 1 * p, p);
 
