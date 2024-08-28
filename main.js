@@ -269,7 +269,7 @@ function animIcon() {
 				}
 			).onfinish = function() {
 				cvLink.addEventListener('click', function() {
-					open('https://sabarikameswaran.github.io/cv');
+					open('https://github.com/SabariKameswaran/SabariKameswaran.github.io/blob/main/cv.pdf');
 				});
 			};
 		};
